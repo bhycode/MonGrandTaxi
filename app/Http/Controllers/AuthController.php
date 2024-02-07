@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -41,4 +43,40 @@ class AuthController extends Controller
 
         return redirect()->route('signup');
     }
+
+
+
+
+
+
+    // Login
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'phoneNumber' => 'required|string|numeric|min:9',
+            'password' => 'required|string|min:8|max:255',
+        ]);
+
+        $credentials = [
+            'phoneNumber' => $request->input('phoneNumber'),
+            'password' => $request->input('password'),
+        ];
+
+        try {
+            if (Auth::attempt($credentials)) {
+                return redirect()->intended('/dashboard');
+            }
+        } catch (\Exception $e) {
+            // Handle any exceptions during the authentication attempt
+        }
+
+        throw ValidationException::withMessages(['phoneNumber' => 'Invalid credentials']);
+    }
+
+
 }
