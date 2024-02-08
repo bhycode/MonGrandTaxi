@@ -24,14 +24,42 @@
             </li>
         </ul>
         <div class="navbar-nav ml-2">
-            <a href="#" class="btn btn-primary mx-2">Login</a>
-            <a href="#" class="btn btn-primary mx-2">Signup</a>
+
+            @auth
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger mx-2">Logout</a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @else
+            <a href="{{ route('login') }}" class="btn btn-primary mx-2">Login</a>
+            <a href="{{ route('signup') }}" class="btn btn-primary mx-2">Signup</a>
+        @endauth
+
         </div>
     </div>
 </nav>
 
+
 <div class="container mt-4">
     <h1>Welcome to Your App!</h1>
+    <div class="container">
+        <section id="welcome-section">
+            <h1>Welcome, {{ Auth::user()->name }}</h1>
+        </section>
+
+        <section id="user-info-section">
+            <h2>User Information</h2>
+            <p>Your ID: {{ Auth::user()->id }}</p>
+            <p>Your Role: {{ Auth::user()->role }}</p>
+
+        </section>
+
+        <section id="dashboard-content-section">
+            <h2>Dashboard Content</h2>
+
+        </section>
+    </div>
     <!-- Your home content goes here -->
 </div>
 

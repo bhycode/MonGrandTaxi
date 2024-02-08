@@ -41,7 +41,7 @@ class AuthController extends Controller
             'role' => $request->input('role'),
         ]);
 
-        return redirect()->route('signup');
+        return redirect()->route('login');
     }
 
 
@@ -69,13 +69,28 @@ class AuthController extends Controller
 
         try {
             if (Auth::attempt($credentials)) {
-                return redirect()->intended('/dashboard');
+
+                // After login done save user data
+                $user = Auth::user();
+
+                session(['user_id' => $user->id, 'user_role' => $user->role]);
+
+                return redirect()->intended('/home');
+
             }
         } catch (\Exception $e) {
             // Handle any exceptions during the authentication attempt
         }
 
         throw ValidationException::withMessages(['phoneNumber' => 'Invalid credentials']);
+    }
+
+
+    public function logout()
+    {
+        Auth::logout();
+
+         return redirect('/login');
     }
 
 
