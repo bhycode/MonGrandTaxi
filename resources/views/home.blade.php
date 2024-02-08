@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MonGrandTaxi</title>
-    <!-- Include Bootstrap CSS -->
+    <title>MonGrandTaxi - Reservation</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .top-section {
+            position: relative;
+            height: 300px; /* Adjust the height as needed */
+            overflow: hidden;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5; /* Adjust the opacity as needed */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Adjust the overlay color and opacity as needed */
+        }
+
+        .centered-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 
@@ -24,10 +58,8 @@
             </li>
         </ul>
         <div class="navbar-nav ml-2">
-
             @auth
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger mx-2">Logout</a>
-
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
@@ -35,35 +67,31 @@
                 <a href="{{ route('login') }}" class="btn btn-primary mx-2">Login</a>
                 <a href="{{ route('signup') }}" class="btn btn-primary mx-2">Signup</a>
             @endauth
-
         </div>
     </div>
 </nav>
 
-
-<div class="container mt-4">
-    <h1>Welcome to Your App!</h1>
-    <div class="container">
-        <section id="welcome-section">
-            <h1>Welcome, {{ Auth::user()->name }}</h1>
-        </section>
-
-        <section id="user-info-section">
-            <h2>User Information</h2>
-            <p>Your ID: {{ Auth::user()->id }}</p>
-            <p>Your Role: {{ Auth::user()->role }}</p>
-
-        </section>
-
-        <section id="dashboard-content-section">
-            <h2>Dashboard Content</h2>
-
-        </section>
+<!-- Top Section with Background Image and Overlay -->
+<div class="top-section">
+    <img class="background-image" src="https://images.unsplash.com/photo-1516733968668-dbdce39c4651?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Background Image">
+    <div class="overlay"></div>
+    <div class="centered-content">
+        <h2>Discover the Comfort of MonGrandTaxi</h2>
+        <p>Your preferred choice for seamless taxi reservations.</p>
     </div>
-    <!-- Your home content goes here -->
 </div>
 
-<!-- Include Bootstrap JS and jQuery (you may need to adjust the versions) -->
+<div class="container mt-4">
+    <h1>Taxi Reservation</h1>
+    <div class="container">
+        <!-- Your reservation form and content go here -->
+        <form>
+            <!-- Form fields go here -->
+            <button type="submit" class="btn btn-primary mt-3">Reserve Now</button>
+        </form>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
