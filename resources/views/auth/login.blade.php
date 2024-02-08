@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 mx-auto mt-5"> {{-- Added mx-auto and mt-5 --}}
+            <div class="col-md-8 mx-auto mt-5">
                 <div class="card">
                     <div class="card-header">{{ __('Login') }}</div>
 
@@ -40,6 +40,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                <a href="{{ route('signup') }}" class="btn btn-success">
+                                    {{ __('Sign Up') }}
+                                </a>
                             </div>
                         </form>
                     </div>
