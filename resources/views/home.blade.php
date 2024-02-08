@@ -26,15 +26,15 @@
         <div class="navbar-nav ml-2">
 
             @auth
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger mx-2">Logout</a>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger mx-2">Logout</a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        @else
-            <a href="{{ route('login') }}" class="btn btn-primary mx-2">Login</a>
-            <a href="{{ route('signup') }}" class="btn btn-primary mx-2">Signup</a>
-        @endauth
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="btn btn-primary mx-2">Login</a>
+                <a href="{{ route('signup') }}" class="btn btn-primary mx-2">Signup</a>
+            @endauth
 
         </div>
     </div>
