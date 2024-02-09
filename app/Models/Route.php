@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Route extends Model
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory;
 
     protected $fillable = [
         'travelHour',

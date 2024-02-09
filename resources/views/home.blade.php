@@ -39,6 +39,17 @@
             text-align: center;
             color: white;
         }
+
+        .card-section {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+        }
+
+        .card {
+            width: 300px;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
@@ -73,7 +84,7 @@
 
 <!-- Top Section with Background Image and Overlay -->
 <div class="top-section">
-    <img class="background-image" src="https://images.unsplash.com/photo-1516733968668-dbdce39c4651?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Background Image">
+    <img class="background-image" src="https://images.unsplash.com/photo-1556122071-e404eaedb77f?q=80&w=2034&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Background Image">
     <div class="overlay"></div>
     <div class="centered-content">
         <h2>Discover the Comfort of MonGrandTaxi</h2>
@@ -81,14 +92,35 @@
     </div>
 </div>
 
-<div class="container mt-4">
-    <h1>Taxi Reservation</h1>
-    <div class="container">
-        <!-- Your reservation form and content go here -->
-        <form>
-            <!-- Form fields go here -->
-            <button type="submit" class="btn btn-primary mt-3">Reserve Now</button>
-        </form>
+<!-- Pricing, Customers, and Drivers Cards -->
+<div class="container">
+    <div class="card-section">
+        <!-- Pricing Card -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Pricing</h5>
+                <p class="card-text">Affordable and flexible pricing plans to suit your needs.</p>
+                <a href="#" class="btn btn-primary">View Plans</a>
+            </div>
+        </div>
+
+        <!-- Customers Card -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Our Customers</h5>
+                <p class="card-text">Join our community of over 95,000 satisfied customers.</p>
+                <a href="#" class="btn btn-primary">Read Testimonials</a>
+            </div>
+        </div>
+
+        <!-- Drivers Card -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Our Drivers</h5>
+                <p class="card-text">Become one of our 2,500 professional and dedicated drivers.</p>
+                <a href="#" class="btn btn-primary">Join Our Team</a>
+            </div>
+        </div>
     </div>
 </div>
 

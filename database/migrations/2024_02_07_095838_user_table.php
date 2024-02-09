@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('phoneNumber');
             $table->string('password');
             $table->tinyInteger('role')->default(3);
+            $table->tinyInteger('taxiSets')->default(0);
+            $table->boolean('isAvailable')->default(1);
         });
     }
 

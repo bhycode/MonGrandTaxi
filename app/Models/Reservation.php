@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory;
 
-    protected $table = 'Reservation';
+    protected $table = 'Reservations';
 
     protected $fillable = [
         'driverId',
