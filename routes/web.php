@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DriverDashboardController;
 use App\Http\Controllers\DriverRatingController;
+use App\Http\Controllers\PassengerDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,9 +58,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    // ... other routes ...
 
-    // Reservations management route
     Route::get('/admin/reservations', [AdminDashboardController::class, 'index'])->name('admin.reservations');
     Route::delete('/admin/reservations/{id}', [AdminDashboardController::class, 'softDeleteReservation'])->name('admin.softDeleteReservation');
 });
@@ -84,3 +83,13 @@ Route::post('/driver/{driverId}/add-rating', [DriverRatingController::class, 'st
 
 // Show all ratings for a driver
 Route::get('/driver/{driverId}/ratings', [DriverRatingController::class, 'index'])->name('driver.ratings');
+
+
+
+Route::middleware(['auth', 'passenger'])->group(function () {
+    Route::get('/passenger/dashboard', [PassengerDashboardController::class, 'index'])->name('passenger.dashboard');
+    Route::post('/passenger/reservations', [PassengerDashboardController::class, 'storeReservation'])->name('passenger.storeReservation');
+    Route::delete('/passenger/reservations/{id}', [PassengerDashboardController::class, 'softDeleteReservation'])->name('passenger.softDeleteReservation');
+    Route::get('/passenger/add-reservation', [PassengerDashboardController::class, 'addReservationView'])->name('passenger.addReservationView');
+
+});

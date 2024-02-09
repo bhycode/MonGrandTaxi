@@ -34,7 +34,6 @@
     </div>
 
     <script>
-        // Update the displayed value when the input changes
         document.getElementById('rateValue').addEventListener('input', function() {
             document.getElementById('rateOutput').innerText = this.value;
         });
