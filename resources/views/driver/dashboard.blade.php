@@ -51,5 +51,10 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="mt-4">
+            <!-- Button to view driver ratings -->
+            <a href="{{ route('driver.ratings', ['driverId' => auth()->id()]) }}" class="btn btn-info">View Ratings</a>
+        </div>
     </div>
 @endsection

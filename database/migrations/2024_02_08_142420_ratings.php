@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('rateValue');
             $table->unsignedBigInteger('driverId');
             $table->unsignedBigInteger('passengerId');
+            $table->string('comment');
 
             // Foreign keys
             $table->foreign('driverId')->references('id')->on('users')->onDelete('cascade');

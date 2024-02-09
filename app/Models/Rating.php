@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rating extends Model
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory;
 
-    protected $table = 'Rating';
+    protected $table = 'Ratings';
 
     protected $fillable = [
         'rateValue',
         'driverId',
         'passengerId',
+        'comment',
     ];
 
     public $timestamps = false;

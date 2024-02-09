@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DriverDashboardController;
+use App\Http\Controllers\DriverRatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,3 +71,16 @@ Route::middleware(['auth', 'driver'])->group(function () {
     Route::get('/driver/dashboard', [DriverDashboardController::class, 'index'])->name('driver.dashboard');
     Route::post('/driver/toggle-availability', [DriverDashboardController::class, 'toggleAvailability'])->name('driver.toggleAvailability');
 });
+
+
+
+// Route::get('/driver/{driverId}/ratings', [DriverRatingController::class, 'index'])->name('driver.ratings');
+
+// Show the form to add a rating
+Route::get('/driver/{driverId}/add-rating', [DriverRatingController::class, 'create'])->name('driver.addRating');
+
+// Store the submitted rating
+Route::post('/driver/{driverId}/add-rating', [DriverRatingController::class, 'store'])->name('driver.storeRating');
+
+// Show all ratings for a driver
+Route::get('/driver/{driverId}/ratings', [DriverRatingController::class, 'index'])->name('driver.ratings');
