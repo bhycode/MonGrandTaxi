@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\DriverDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +63,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/reservations/{id}', [AdminDashboardController::class, 'softDeleteReservation'])->name('admin.softDeleteReservation');
 });
 
+
+
+
+Route::middleware(['auth', 'driver'])->group(function () {
+    Route::get('/driver/dashboard', [DriverDashboardController::class, 'index'])->name('driver.dashboard');
+    Route::post('/driver/toggle-availability', [DriverDashboardController::class, 'toggleAvailability'])->name('driver.toggleAvailability');
+});
