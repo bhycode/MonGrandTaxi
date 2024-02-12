@@ -91,5 +91,4 @@ Route::middleware(['auth', 'passenger'])->group(function () {
     Route::post('/passenger/reservations', [PassengerDashboardController::class, 'storeReservation'])->name('passenger.storeReservation');
     Route::delete('/passenger/reservations/{id}', [PassengerDashboardController::class, 'softDeleteReservation'])->name('passenger.softDeleteReservation');
     Route::get('/passenger/add-reservation', [PassengerDashboardController::class, 'addReservationView'])->name('passenger.addReservationView');
-
 });
