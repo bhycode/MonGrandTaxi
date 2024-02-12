@@ -1,6 +1,5 @@
-<!-- resources/views/driver/ratings.blade.php -->
 
-@extends('layouts.app') <!-- Assuming you have a default layout -->
+@extends('layouts.app')
 
 @section('content')
     <div class="container text-center mt-5">

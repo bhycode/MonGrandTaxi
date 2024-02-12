@@ -1,4 +1,3 @@
-<!-- resources/views/driver/dashboard.blade.php -->
 
 @extends('layouts.app')
 
