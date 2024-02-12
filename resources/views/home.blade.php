@@ -8,7 +8,7 @@
     <style>
         .top-section {
             position: relative;
-            height: 300px; /* Adjust the height as needed */
+            height: 300px;
             overflow: hidden;
         }
 
@@ -19,7 +19,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.5; /* Adjust the opacity as needed */
+            opacity: 0.5;
         }
 
         .overlay {
@@ -28,7 +28,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3); /* Adjust the overlay color and opacity as needed */
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .centered-content {

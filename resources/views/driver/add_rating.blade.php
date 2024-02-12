@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <label for="rateValue">Rating:</label>
                                 <input type="range" class="form-control-range" id="rateValue" name="rateValue" min="1" max="10" step="1" required>
-                                <output id="rateOutput" class="mt-2 d-block text-center">1</output>
+                                <output id="rateOutput" class="mt-2 d-block text-center">6</output>
                             </div>
 
                             <div class="form-group">

@@ -18,9 +18,9 @@ use App\Http\Controllers\PassengerDashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
+
 
 Route::get('/home', function () {
     return view('home');
