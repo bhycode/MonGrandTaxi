@@ -14,6 +14,6 @@ class PassengerMiddleware
             return $next($request);
         }
 
-        abort(403, 'Unauthorized action.');
+        return redirect('/login')->with('error', 'You do not have permission to access the passenger dashboard.');
     }
 }
