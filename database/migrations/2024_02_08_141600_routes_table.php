@@ -19,9 +19,12 @@ return new class extends Migration
             $table->string('travelDate');
             $table->unsignedBigInteger('departCity');
             $table->unsignedBigInteger('arriveCity');
+            $table->unsignedBigInteger('driverId')->nullable();
+
 
             $table->foreign('departCity')->references('id')->on('cities')->onDelete('cascade');
             $table->foreign('arriveCity')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('driverId')->references('id')->on('users')->onDelete('cascade');
 
         });
     }

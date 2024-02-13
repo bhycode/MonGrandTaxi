@@ -16,6 +16,7 @@ class Route extends Model
         'travelDate',
         'departCity',
         'arriveCity',
+        'driverId',
     ];
 
     public $timestamps = false;
@@ -28,5 +29,10 @@ class Route extends Model
     public function arrivalCity()
     {
         return $this->belongsTo(City::class, 'arriveCity');
+    }
+
+    public function driver()
+    {
+        return $this->belongsTo(User::class, 'driverId');
     }
 }
