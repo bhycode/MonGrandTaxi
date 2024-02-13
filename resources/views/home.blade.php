@@ -6,6 +6,14 @@
     <title>MonGrandTaxi - Reservation</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .navbar-brand {
+            font-weight: bold;
+        }
+
+        .navbar-nav.ml-auto .nav-link {
+            margin-right: 15px;
+        }
+
         .top-section {
             position: relative;
             height: 300px;
@@ -64,25 +72,40 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Home</a>
             </li>
+
+            @auth
+                @if(auth()->user()->role == 1)
+                    <!-- Display admin dashboard link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
+                    </li>
+                @elseif(auth()->user()->role == 2)
+                    <!-- Display driver dashboard link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('driver.dashboard') }}">Driver Dashboard</a>
+                    </li>
+                @elseif(auth()->user()->role == 3)
+                    <!-- Display passenger dashboard link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('passenger.dashboard') }}">Booking and Management</a>
+                    </li>
+                @endif
+            @endauth
             <li class="nav-item">
-                <a class="nav-link" href="#">Reservation</a>
+                @auth
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger mx-2">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="nav-link">Login</a>
+                    <a href="{{ route('signup') }}" class="nav-link">Signup</a>
+                @endauth
             </li>
         </ul>
-        <div class="navbar-nav ml-2">
-            @auth
-                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger mx-2">Logout</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            @else
-                <a href="{{ route('login') }}" class="btn btn-primary mx-2">Login</a>
-                <a href="{{ route('signup') }}" class="btn btn-primary mx-2">Signup</a>
-            @endauth
-        </div>
     </div>
 </nav>
 
-<!-- Top Section with Background Image and Overlay -->
 <div class="top-section">
     <img class="background-image" src="https://images.unsplash.com/photo-1556122071-e404eaedb77f?q=80&w=2034&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Background Image">
     <div class="overlay"></div>
@@ -92,10 +115,8 @@
     </div>
 </div>
 
-<!-- Pricing, Customers, and Drivers Cards -->
 <div class="container">
     <div class="card-section">
-        <!-- Pricing Card -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Pricing</h5>
@@ -103,8 +124,6 @@
                 <a href="#" class="btn btn-primary">View Plans</a>
             </div>
         </div>
-
-        <!-- Customers Card -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Our Customers</h5>
@@ -112,8 +131,6 @@
                 <a href="#" class="btn btn-primary">Read Testimonials</a>
             </div>
         </div>
-
-        <!-- Drivers Card -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Our Drivers</h5>

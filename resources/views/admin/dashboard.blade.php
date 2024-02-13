@@ -1,6 +1,5 @@
-<!-- admin/dashboard.blade.php -->
 
-@extends('layouts.app') <!-- Assuming you have a default layout -->
+@extends('layouts.app')
 
 @section('content')
     <div class="container mt-5">

@@ -10,11 +10,11 @@ class DriverDashboardController extends Controller
 {
     public function index()
     {
-        // Fetch driver's reservations
+
         $driverId = auth()->id();
         $reservations = Reservation::where('driverId', $driverId)->get();
 
-        // Get driver's availability
+
         $driver = User::find($driverId);
         $availability = $driver->isAvailable;
 
@@ -26,7 +26,7 @@ class DriverDashboardController extends Controller
 
     public function toggleAvailability()
     {
-        // Toggle driver's availability
+
         $driver = User::find(auth()->id());
         $driver->update(['isAvailable' => !$driver->isAvailable]);
 
