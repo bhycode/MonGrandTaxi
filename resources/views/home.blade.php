@@ -63,29 +63,26 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">MonGrandTaxi</a>
+    <a class="navbar-brand" href="home">MonGrandTaxi</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="home">Home</a>
             </li>
 
             @auth
                 @if(auth()->user()->role == 1)
-                    <!-- Display admin dashboard link -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
                     </li>
                 @elseif(auth()->user()->role == 2)
-                    <!-- Display driver dashboard link -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('driver.dashboard') }}">Driver Dashboard</a>
                     </li>
                 @elseif(auth()->user()->role == 3)
-                    <!-- Display passenger dashboard link -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('passenger.dashboard') }}">Booking and Management</a>
                     </li>
@@ -121,27 +118,27 @@
             <div class="card-body">
                 <h5 class="card-title">Pricing</h5>
                 <p class="card-text">Affordable and flexible pricing plans to suit your needs.</p>
-                <a href="#" class="btn btn-primary">View Plans</a>
+                <a href="home" class="btn btn-primary">View Plans</a>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Our Customers</h5>
                 <p class="card-text">Join our community of over 95,000 satisfied customers.</p>
-                <a href="#" class="btn btn-primary">Read Testimonials</a>
+                <a href="home" class="btn btn-primary">Read Testimonials</a>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Our Drivers</h5>
                 <p class="card-text">Become one of our 2,500 professional and dedicated drivers.</p>
-                <a href="#" class="btn btn-primary">Join Our Team</a>
+                <a href="home" class="btn btn-primary">Join Our Team</a>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Footer Section -->
+
 <footer class="bg-dark text-light py-4">
     <div class="container text-center">
         <p>&copy; 2024 MonGrandTaxi. All rights reserved.</p>
@@ -154,4 +151,3 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
