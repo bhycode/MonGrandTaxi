@@ -49,14 +49,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-// Route::middleware(['auth'])->group(function () {
-//     // ... other routes ...
-
-//     // Reservations management route
-//     Route::get('/admin/reservations', [AdminDashboardController::class, 'reservationsManagement'])->name('admin.reservations');
-// });
-
-
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/reservations', [AdminDashboardController::class, 'index'])->name('admin.reservations');
@@ -73,17 +65,14 @@ Route::middleware(['auth', 'driver'])->group(function () {
 
 
 
-// Route::get('/driver/{driverId}/ratings', [DriverRatingController::class, 'index'])->name('driver.ratings');
 
-// Show the form to add a rating
 Route::get('/driver/{driverId}/add-rating', [DriverRatingController::class, 'create'])->name('driver.addRating');
 
-// Store the submitted rating
 Route::post('/driver/{driverId}/add-rating', [DriverRatingController::class, 'store'])->name('driver.storeRating');
 
-// Show all ratings for a driver
 Route::get('/driver/{driverId}/ratings', [DriverRatingController::class, 'index'])->name('driver.ratings');
-
+Route::post('/driver/toggle-payment-method', [DriverDashboardController::class, 'togglePaymentMethod'])
+    ->name('driver.togglePaymentMethod');
 
 
 Route::middleware(['auth', 'passenger'])->group(function () {
@@ -92,3 +81,7 @@ Route::middleware(['auth', 'passenger'])->group(function () {
     Route::delete('/passenger/reservations/{id}', [PassengerDashboardController::class, 'softDeleteReservation'])->name('passenger.softDeleteReservation');
     Route::get('/passenger/add-reservation', [PassengerDashboardController::class, 'addReservationView'])->name('passenger.addReservationView');
 });
+
+
+
+

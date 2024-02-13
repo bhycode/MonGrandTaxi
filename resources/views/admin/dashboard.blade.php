@@ -5,39 +5,48 @@
     <div class="container mt-5">
         <h1 class="mb-4">Admin Dashboard</h1>
 
-        <div class="card mb-4">
-            <div class="card-header">
-                <h2>Drivers Management</h2>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
+
+
+            <!-- Drivers Management Section -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Drivers Management</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Action</th>
+                            <th>View Ratings</th> <!-- Add this column -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($drivers as $driver)
                             <tr>
-                                <th>Name</th>
-                                <th>Phone Number</th>
-                                <th>Action</th>
+                                <td>{{ $driver->name }}</td>
+                                <td>{{ $driver->phoneNumber }}</td>
+                                <td>
+                                    <form action="{{ route('admin.softDeleteDriver', $driver->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <a href="{{ route('driver.ratings', ['driverId' => $driver->id]) }}" class="btn btn-info btn-sm">View Ratings</a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($drivers as $driver)
-                                <tr>
-                                    <td>{{ $driver->name }}</td>
-                                    <td>{{ $driver->phoneNumber }}</td>
-                                    <td>
-                                        <form action="{{ route('admin.softDeleteDriver', $driver->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
+
+
 
         <div class="card">
             <div class="card-header">

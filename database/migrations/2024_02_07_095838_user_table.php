@@ -22,6 +22,7 @@ return new class extends Migration
             $table->tinyInteger('role')->default(3);
             $table->tinyInteger('taxiSets')->default(0);
             $table->boolean('isAvailable')->default(1);
+            $table->tinyInteger('paymentMethod')->default(1);
         });
     }
 
