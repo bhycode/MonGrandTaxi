@@ -12,42 +12,84 @@
                         <div class="mt-4">
                             <h2>Reservations</h2>
 
-                            <a href="{{ route('passenger.addReservationView') }}" class="btn btn-primary mb-3">Add Reservation</a>
+                <!-- Search and Filter Form -->
+                <form action="{{ route('passenger.dashboard') }}" method="GET">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="driverName">Search by Driver Name:</label>
+                            <input type="text" class="form-control" id="driverName" name="driverName" value="{{ request('driverName') }}">
+                        </div>
 
-                            @if(count($reservations) > 0)
+                        <div class="form-group col-md-4">
+                            <label for="departCity">Filter by Departure City:</label>
+                            <select class="form-control" id="departCity" name="departCity">
+                                <option value="">All Cities</option>
+                                @foreach($cities as $city)
+                                    <option value="{{ $city->id }}" {{ request('departCity') == $city->id ? 'selected' : '' }}>
+                                        {{ $city->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="arriveCity">Filter by Arrival City:</label>
+                            <select class="form-control" id="arriveCity" name="arriveCity">
+                                <option value="">All Cities</option>
+                                @foreach($cities as $city)
+                                    <option value="{{ $city->id }}" {{ request('arriveCity') == $city->id ? 'selected' : '' }}>
+                                        {{ $city->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                </form>
+                <!-- End Search and Filter Form -->
+
+
+                            <!-- Routes Table -->
+                            @if(count($routes) > 0)
                                 <table class="table table-bordered mt-4">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>Route</th>
-                                            <th>Seats</th>
-                                            <th>Date</th>
+                                            <th>Driver</th>
+                                            <th>Departure City</th>
+                                            <th>Arrival City</th>
+                                            <th>Travel Hour</th>
+                                            <th>Travel Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($reservations as $reservation)
+                                        @forelse ($routes as $route)
                                             <tr>
-                                                <td>{{ $reservation->route->name }}</td>
-                                                <td>{{ $reservation->seats }}</td>
-                                                <td>{{ $reservation->resDate }}</td>
+                                                <td>{{ $route->driver->name }}</td>
+                                                <td>{{ $route->departureCity->name }}</td>
+                                                <td>{{ $route->arrivalCity->name }}</td>
+                                                <td>{{ $route->travelHour }}</td>
+                                                <td>{{ $route->travelDate }}</td>
                                                 <td>
-                                                    <form action="{{ route('passenger.softDeleteReservation', $reservation->id) }}" method="POST">
+                                                    <form action="{{ route('passenger.reserveRoute', $route->id) }}" method="POST">
                                                         @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                        <button type="submit" class="btn btn-success btn-sm">Reserve</button>
                                                     </form>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="4" class="text-center">No reservations available.</td>
+                                                <td colspan="6" class="text-center">No routes available.</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
                             @else
-                                <p class="mt-4">No reservations available.</p>
+                                <p class="mt-4">No routes available.</p>
                             @endif
+                            <!-- End Routes Table -->
+
                         </div>
                     </div>
                 </div>
