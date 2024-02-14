@@ -6,36 +6,33 @@ use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Route;
 use App\Models\City;
+use App\Models\User;
 
 class PassengerDashboardController extends Controller
 {
 
     public function index(Request $request)
     {
-
         $passengerId = auth()->id();
         $reservations = Reservation::where('passengerId', $passengerId)->get();
 
-
-        $routes = Route::query();
-
-
-        if ($request->filled('departCity')) {
-            $routes->where('departCity', $request->input('departCity'));
-        }
-
-        if ($request->filled('arriveCity')) {
-            $routes->where('arriveCity', $request->input('arriveCity'));
-        }
+        $query = Route::with(['driver', 'departureCity', 'arrivalCity']);
 
         if ($request->filled('driverName')) {
-            $routes->whereHas('driver', function ($query) use ($request) {
+            $query->whereHas('driver', function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->input('driverName') . '%');
             });
         }
 
-        $routes = $routes->get();
+        if ($request->filled('departCity')) {
+            $query->where('departCity', $request->input('departCity'));
+        }
 
+        if ($request->filled('arriveCity')) {
+            $query->where('arriveCity', $request->input('arriveCity'));
+        }
+
+        $routes = $query->get();
 
         $cities = City::all();
 
@@ -45,6 +42,8 @@ class PassengerDashboardController extends Controller
             'cities' => $cities,
         ]);
     }
+
+
 
     public function storeReservation(Request $request)
     {
