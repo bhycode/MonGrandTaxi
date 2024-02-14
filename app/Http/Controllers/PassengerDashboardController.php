@@ -57,6 +57,7 @@ class PassengerDashboardController extends Controller
 
         Reservation::create([
             'passengerId' => auth()->id(),
+            'driverId' => Route::findOrFail($request->input('route_id'))->driverId,
             'routeId' => $request->input('route_id'),
             'seats' => $request->input('seats'),
             'resDate' => $request->input('res_date'),
@@ -73,27 +74,18 @@ class PassengerDashboardController extends Controller
         return redirect()->route('passenger.dashboard')->with('success', 'Reservation deleted successfully.');
     }
 
-    public function addReservationView()
+
+
+    public function reserveRoute($routeId)
     {
+        // Retrieve the route details, assuming you have a Route model
+        $route = Route::findOrFail($routeId);
 
-        $routes = Route::all();
-
-        return view('passenger.add-reservation', [
-            'routes' => $routes,
-        ]);
+        return view('passenger.reserve-route', ['route' => $route]);
     }
 
-    public function reserveRoute(Route $route)
-    {
 
 
-        Reservation::create([
-            'passengerId' => auth()->id(),
-            'routeId' => $route->id,
-        ]);
-
-        return redirect()->route('passenger.dashboard')->with('success', 'Route reserved successfully.');
-    }
 
 
 

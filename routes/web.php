@@ -45,13 +45,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-
     Route::delete('/admin/passenger/{id}/soft-delete', [AdminDashboardController::class, 'softDeletePassenger'])->name('admin.softDeletePassenger');
 });
 
 
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/admin/reservations', [AdminDashboardController::class, 'index'])->name('admin.reservations');
     Route::delete('/admin/reservations/{id}', [AdminDashboardController::class, 'softDeleteReservation'])->name('admin.softDeleteReservation');
 });
@@ -84,8 +82,9 @@ Route::middleware(['auth', 'passenger'])->group(function () {
     Route::get('/passenger/dashboard', [PassengerDashboardController::class, 'index'])->name('passenger.dashboard');
     Route::post('/passenger/reservations', [PassengerDashboardController::class, 'storeReservation'])->name('passenger.storeReservation');
     Route::delete('/passenger/reservations/{id}', [PassengerDashboardController::class, 'softDeleteReservation'])->name('passenger.softDeleteReservation');
-    Route::get('/passenger/add-reservation', [PassengerDashboardController::class, 'addReservationView'])->name('passenger.addReservationView');
+    // Route::get('/passenger/add-reservation', [PassengerDashboardController::class, 'addReservationView'])->name('passenger.addReservationView');
 
+    Route::get('/passenger/reserve-route/{route}', [PassengerDashboardController::class, 'reserveRoute'])->name('passenger.reserveRoute');
     Route::post('/passenger/reserve-route/{route}', [PassengerDashboardController::class, 'reserveRoute'])->name('passenger.reserveRoute');
 });
 
