@@ -20,8 +20,6 @@
             </div>
         </div>
 
-
-
         <div class="mt-4">
             <h2>Payment Method</h2>
             <p>Your current payment method:
@@ -57,10 +55,6 @@
             </form>
         </div>
 
-
-
-
-
         <hr>
 
         <div class="mt-4">
@@ -92,8 +86,46 @@
         </div>
 
         <div class="mt-4">
-            <!-- Button to view driver ratings -->
             <a href="{{ route('driver.ratings', ['driverId' => auth()->id()]) }}" class="btn btn-info">View Ratings</a>
+        </div>
+
+        <div class="mt-4">
+            <h2>Routes Management</h2>
+            <a href="{{ route('driver.routes.create') }}" class="btn btn-success mb-3">Add Route</a>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Departure City</th>
+                        <th>Arrival City</th>
+                        <th>Travel Hour</th>
+                        <th>Travel Date</th>
+                        <!-- Add more columns as needed -->
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($driverRoutes as $route)
+                        <tr>
+                            <td>{{ $route->departureCity->name }}</td>
+                            <td>{{ $route->arrivalCity->name }}</td>
+                            <td>{{ $route->travelHour }}</td>
+                            <td>{{ $route->travelDate }}</td>
+                            <!-- Add more columns as needed -->
+                            <td>
+                                <form action="{{ route('driver.routes.delete', ['routeId' => $route->id]) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this route?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center">No routes available.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection

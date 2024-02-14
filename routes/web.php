@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DriverDashboardController;
 use App\Http\Controllers\DriverRatingController;
 use App\Http\Controllers\PassengerDashboardController;
+use App\Http\Controllers\DriverRoutesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,8 +62,12 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'driver'])->group(function () {
     Route::get('/driver/dashboard', [DriverDashboardController::class, 'index'])->name('driver.dashboard');
     Route::post('/driver/toggle-availability', [DriverDashboardController::class, 'toggleAvailability'])->name('driver.toggleAvailability');
-});
 
+    Route::get('/driver/routes/create', [DriverDashboardController::class, 'create'])->name('driver.routes.create');
+    Route::post('/driver/routes', [DriverDashboardController::class, 'store'])->name('driver.routes.store');
+    Route::delete('/driver/routes/{routeId}', [DriverDashboardController::class, 'deleteRoute'])->name('driver.routes.delete');
+
+});
 
 
 
