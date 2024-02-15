@@ -32,27 +32,25 @@
 
                 <div class="form-group">
                     <label for="travelDate">Travel Date</label>
-                    <input type="text" class="form-control datepicker" id="travelDate" name="travelDate" placeholder="Select travel date">
+                    <input type="text" class="form-control flatpickr" id="travelDate" name="travelDate" placeholder="Select travel date and time">
                 </div>
 
-                <!-- Add more form fields as needed -->
 
                 <button type="submit" class="btn btn-primary btn-block">Add Route</button>
             </form>
         </div>
     </div>
 
-    <!-- Include your date picker library script here -->
-    <!-- For example, if using Bootstrap Datepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
-        // Initialize the date picker
-        $(document).ready(function(){
-            $('.datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true
-            });
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        flatpickr('.flatpickr', {
+            enableTime: true,
+            dateFormat: 'Y-m-d H:i:S',
+            minDate: tomorrow,
         });
     </script>
 @endsection

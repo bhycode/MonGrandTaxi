@@ -35,4 +35,5 @@ class Route extends Model
     {
         return $this->belongsTo(User::class, 'driverId');
     }
+
 }

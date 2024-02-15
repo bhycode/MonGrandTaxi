@@ -21,4 +21,9 @@ class User extends Authenticatable
 
     public $timestamps = false;
 
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'driverId');
+    }
+
 }

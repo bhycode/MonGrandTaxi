@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('passengerId');
             $table->unsignedBigInteger('routeId');
             $table->integer('seats');
-            $table->string('resDate');
+            $table->datetime('resDate');
 
             // Foreign keys
             $table->foreign('driverId')->references('id')->on('users')->onDelete('cascade');

@@ -33,15 +33,13 @@ class PassengerDashboardController extends Controller
         }
 
         $routes = $query->get();
-
         $cities = City::all();
 
-        return view('passenger.dashboard', [
-            'reservations' => $reservations,
-            'routes' => $routes,
-            'cities' => $cities,
-        ]);
+        $routes = $routes ?? collect();
+
+        return view('passenger.dashboard', compact('reservations', 'routes', 'cities'));
     }
+
 
 
 
@@ -60,7 +58,7 @@ class PassengerDashboardController extends Controller
             'driverId' => Route::findOrFail($request->input('route_id'))->driverId,
             'routeId' => $request->input('route_id'),
             'seats' => $request->input('seats'),
-            'resDate' => $request->input('res_date'),
+            'resDate' => now(),
         ]);
 
         return redirect()->route('passenger.dashboard')->with('success', 'Reservation added successfully.');

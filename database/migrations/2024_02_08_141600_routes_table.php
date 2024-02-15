@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
             $table->integer('travelHour');
-            $table->string('travelDate');
+            $table->datetime('travelDate');
             $table->unsignedBigInteger('departCity');
             $table->unsignedBigInteger('arriveCity');
             $table->unsignedBigInteger('driverId')->nullable();
