@@ -29,7 +29,7 @@ class AuthController extends Controller
         ]);
 
 
-        $imagePath = $request->hasFile('pic') ? $request->file('pic')->store('public/images') : $this->not_found_img_path;
+        $imagePath = $request->hasFile('pic') ? $request->file('pic')->store('images') : $this->not_found_img_path;
 
 
 
@@ -70,7 +70,7 @@ class AuthController extends Controller
         try {
             if (Auth::attempt($credentials)) {
 
-                // After login done save user data
+
                 $user = Auth::user();
 
                 session(['user_id' => $user->id, 'user_role' => $user->role]);
@@ -79,7 +79,7 @@ class AuthController extends Controller
 
             }
         } catch (\Exception $e) {
-            // Handle any exceptions during the authentication attempt
+
         }
 
         throw ValidationException::withMessages(['phoneNumber' => 'Invalid credentials']);

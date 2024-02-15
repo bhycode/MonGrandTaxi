@@ -17,15 +17,19 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Phone Number</th>
                             <th>Action</th>
-                            <th>View Ratings</th> <!-- Add this column -->
+                            <th>View Ratings</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($drivers as $driver)
                             <tr>
+                                <td>
+                                    <img src="{{ asset('storage/' . $driver->pic) }}" alt="{{ $driver->name }}" class="img-thumbnail" style="height: 50px;">
+                                </td>
                                 <td>{{ $driver->name }}</td>
                                 <td>{{ $driver->phoneNumber }}</td>
                                 <td>
@@ -57,6 +61,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>Name</th>
                                 <th>Phone Number</th>
                                 <th>Action</th>
@@ -65,6 +70,9 @@
                         <tbody>
                             @foreach ($passengers as $passenger)
                                 <tr>
+                                    <td>
+                                        <img src="{{ asset('storage/' . $passenger->pic) }}" alt="{{ $driver->name }}" class="img-thumbnail" style="height: 50px;">
+                                    </td>
                                     <td>{{ $passenger->name }}</td>
                                     <td>{{ $passenger->phoneNumber }}</td>
                                     <td>
@@ -82,40 +90,6 @@
             </div>
         </div>
 
-
-        <div class="card">
-            <div class="card-header">
-                <h2>Passengers Management</h2>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Phone Number</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($passengers as $passenger)
-                                <tr>
-                                    <td>{{ $passenger->name }}</td>
-                                    <td>{{ $passenger->phoneNumber }}</td>
-                                    <td>
-                                        <form action="{{ route('admin.softDeletePassenger', $passenger->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
 
 
         <div class="card">

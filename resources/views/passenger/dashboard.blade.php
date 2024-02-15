@@ -95,52 +95,54 @@
                     @endif
 
 
-                        @if(count($reservations) > 0)
-                        <h2>Reservations</h2>
-                        <table class="table table-bordered mt-4">
-                            <thead class="thead-light">
+                    @if(count($reservations) > 0)
+                    <h2>Reservations</h2>
+                    <table class="table table-bordered mt-4">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Driver</th>
+                                <th>Departure City</th>
+                                <th>Arrival City</th>
+                                <th>Travel Hour</th>
+                                <th>Travel Date</th>
+                                <th>Action</th>
+                                <th>Rate</th> <!-- New column for Rate Driver button -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($reservations as $reservation)
                                 <tr>
-                                    <th>Driver</th>
-                                    <th>Departure City</th>
-                                    <th>Arrival City</th>
-                                    <th>Travel Hour</th>
-                                    <th>Travel Date</th>
-                                    <th>Action</th>
+                                    <td>{{ $reservation->driver->name }}</td>
+                                    <td>{{ $reservation->route->departureCity->name }}</td>
+                                    <td>{{ $reservation->route->arrivalCity->name }}</td>
+                                    <td>{{ $reservation->route->travelHour }}</td>
+                                    <td>{{ $reservation->route->travelDate }}</td>
+                                    <td>
+                                        <form action="{{ route('passenger.softDeleteReservation', $reservation->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            @php
+                                                $currentTime = now();
+                                                $reservationTime = \Carbon\Carbon::parse($reservation->resDate);
+                                                $disableCancel = $reservationTime->diffInMinutes($currentTime) >= 60;
+                                            @endphp
+                                            <button type="submit" class="btn btn-danger btn-sm" {{ $disableCancel ? 'disabled' : '' }}>Cancel</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('driver.addRating', ['driverId' => $reservation->driver->id]) }}" class="btn btn-primary btn-sm">Rate Driver</a>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($reservations as $reservation)
-                                    <tr>
-                                        <td>{{ $reservation->driver->name }}</td>
-                                        <td>{{ $reservation->route->departureCity->name }}</td>
-                                        <td>{{ $reservation->route->arrivalCity->name }}</td>
-                                        <td>{{ $reservation->route->travelHour }}</td>
-                                        <td>{{ $reservation->resDate }}</td>
-                                        <td>
-                                            <form action="{{ route('passenger.softDeleteReservation', $reservation->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                @php
-                                                    $currentTime = now();
-                                                    $reservationTime = \Carbon\Carbon::parse($reservation->resDate);
-                                                    $disableCancel = $reservationTime->diffInMinutes($currentTime) >= 60;
-                                                @endphp
-                                                <button type="submit" class="btn btn-danger btn-sm" {{ $disableCancel ? 'disabled' : '' }}>Cancel</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        @else
-                        <p class="mt-4">No reservations found.</p>
-                        @endif
-
-
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @else
+                    <p class="mt-4">No reservations found.</p>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
