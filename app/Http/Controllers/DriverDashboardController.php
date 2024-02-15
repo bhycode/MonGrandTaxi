@@ -11,6 +11,8 @@ use Illuminate\Validation\Rule;
 
 class DriverDashboardController extends Controller
 {
+
+
     public function index()
     {
         $driverId = auth()->id();
@@ -18,6 +20,7 @@ class DriverDashboardController extends Controller
         $driver = User::find($driverId);
         $availability = $driver->isAvailable;
         $paymentMethod = $driver->paymentMethod;
+        $taxiSets = $driver->taxiSets;
 
         $driverRoutes = Route::where('driverId', $driverId)->get();
 
@@ -25,6 +28,7 @@ class DriverDashboardController extends Controller
             'reservations' => $reservations,
             'availability' => $availability,
             'paymentMethod' => $paymentMethod,
+            'taxiSets' => $taxiSets,
             'driverRoutes' => $driverRoutes,
         ]);
     }
@@ -95,6 +99,20 @@ class DriverDashboardController extends Controller
         $route->delete();
 
         return redirect()->route('driver.dashboard')->with('success', 'Route deleted successfully.');
+    }
+
+
+    public function updateTaxiSets(Request $request)
+    {
+        $driver = User::find(auth()->id());
+
+        $request->validate([
+            'taxiSets' => 'required|integer|min:1',
+        ]);
+
+        $driver->update(['taxiSets' => $request->input('taxiSets')]);
+
+        return redirect()->route('driver.dashboard')->with('success', 'Taxi Sets updated successfully.');
     }
 
 

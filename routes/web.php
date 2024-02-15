@@ -77,6 +77,8 @@ Route::get('/driver/{driverId}/ratings', [DriverRatingController::class, 'index'
 Route::post('/driver/toggle-payment-method', [DriverDashboardController::class, 'togglePaymentMethod'])
     ->name('driver.togglePaymentMethod');
 
+Route::post('/driver/updateTaxiSets', [DriverDashboardController::class, 'updateTaxiSets'])
+    ->name('driver.updateTaxiSets');
 
 Route::middleware(['auth', 'passenger'])->group(function () {
     Route::get('/passenger/dashboard', [PassengerDashboardController::class, 'index'])->name('passenger.dashboard');

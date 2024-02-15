@@ -20,6 +20,22 @@
             </div>
         </div>
 
+
+        <div class="mt-4">
+            <h2>Taxi Sets</h2>
+            <p>Your current taxi sets: <span class="badge badge-primary">{{ $taxiSets }}</span></p>
+
+            <form action="{{ route('driver.updateTaxiSets') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="taxiSets">Set Taxi Sets:</label>
+                    <input type="number" name="taxiSets" class="form-control" value="{{ $taxiSets }}" required min = "1" max="7">
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Update Taxi Sets</button>
+            </form>
+        </div>
+
+
         <div class="mt-4">
             <h2>Payment Method</h2>
             <p>Your current payment method:
