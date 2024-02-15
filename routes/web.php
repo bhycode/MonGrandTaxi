@@ -65,6 +65,8 @@ Route::middleware(['auth', 'driver'])->group(function () {
     Route::post('/driver/routes', [DriverDashboardController::class, 'store'])->name('driver.routes.store');
     Route::delete('/driver/routes/{routeId}', [DriverDashboardController::class, 'deleteRoute'])->name('driver.routes.delete');
 
+    Route::delete('/driver/reservations/delete-all', [DriverDashboardController::class, 'deleteAllReservations'])->name('driver.reservations.deleteAll');
+
 });
 
 

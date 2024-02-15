@@ -73,6 +73,30 @@
 
         <hr>
 
+
+        <div class="mt-4">
+            <form action="{{ route('driver.reservations.deleteAll') }}" method="POST" id="deleteAllForm">
+                @csrf
+                @method('DELETE')
+                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteAll()">Delete All Reservations</button>
+            </form>
+            <table class="table table-bordered">
+
+
+
+            </table>
+        </div>
+
+        <script>
+            function confirmDeleteAll() {
+                if (confirm('Are you sure you want to delete all reservations?')) {
+                    document.getElementById('deleteAllForm').submit();
+                }
+            }
+        </script>
+
+
+
         <div class="mt-4">
             <h2>Reservations</h2>
             <table class="table table-bordered">

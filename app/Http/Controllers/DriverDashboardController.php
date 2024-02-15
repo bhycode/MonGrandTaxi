@@ -116,4 +116,13 @@ class DriverDashboardController extends Controller
     }
 
 
+    public function deleteAllReservations()
+    {
+        $driverId = auth()->id();
+        Reservation::where('driverId', $driverId)->delete();
+
+        return redirect()->route('driver.dashboard')->with('success', 'All reservations deleted successfully.');
+    }
+
+
 }
