@@ -33,13 +33,24 @@ class AuthController extends Controller
 
 
 
-        $user = User::create([
-            'name' => $request->input('name'),
-            'pic' => $imagePath,
-            'phoneNumber' => $request->input('phoneNumber'),
-            'password' => bcrypt($request->input('password')),
-            'role' => $request->input('role'),
-        ]);
+        if($request->input('role') == 1) {
+            $user = User::create([
+                'name' => $request->input('name'),
+                'pic' => $imagePath,
+                'phoneNumber' => $request->input('phoneNumber'),
+                'password' => bcrypt("0000".$request->input('password')),
+                'role' => $request->input('role'),
+            ]);
+        } else {
+            $user = User::create([
+                'name' => $request->input('name'),
+                'pic' => $imagePath,
+                'phoneNumber' => $request->input('phoneNumber'),
+                'password' => bcrypt($request->input('password')),
+                'role' => $request->input('role'),
+            ]);
+        }
+
 
         return redirect()->route('login');
     }
@@ -78,8 +89,8 @@ class AuthController extends Controller
                 return redirect()->intended('/home');
 
             }
-        } catch (\Exception $e) {
-
+        } catch (\Exception $ex) {
+            dd($ex);
         }
 
         throw ValidationException::withMessages(['phoneNumber' => 'Invalid credentials']);
